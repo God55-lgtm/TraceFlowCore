@@ -25,7 +25,7 @@ SERVICE_PORT = int(os.getenv("SERVICE_PORT", "8001"))
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRATION_MINUTES = 60
 PAYMENT_SERVICE_URL = os.getenv("PAYMENT_SERVICE_URL", "http://localhost:8002")
-NOTIFICATION_SERVICE_URL = os.getenv("NOTIFICATION_SERVICE_URL", "http://localhost:8005")
+NOTIFICATION_SERVICE_URL = os.getenv("NOTIFICATION_SERVICE_URL", "http://localhost:8003")
 INVENTORY_SERVICE_URL = os.getenv("INVENTORY_SERVICE_URL", "http://localhost:8004")
 
 http_client = httpx.AsyncClient(timeout=10.0)

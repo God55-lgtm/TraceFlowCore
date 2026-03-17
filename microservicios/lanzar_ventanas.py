@@ -6,7 +6,7 @@ services = [
     {"name": "tienda", "port": 8001, "folder": "tienda"},
     {"name": "pago", "port": 8002, "folder": "pago"},
     {"name": "inventario", "port": 8004, "folder": "inventario"},
-    {"name": "notificacion", "port": 8005, "folder": "notificacion"},
+    {"name": "notificacion", "port": 8003, "folder": "notificacion"},
 ]
 
 for svc in services:

@@ -18,7 +18,7 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:12345@localhost/traceflow_db")
 SERVICE_NAME = os.getenv("SERVICE_NAME", "notificacion-service")
 SAMPLE_RATE = float(os.getenv("SAMPLE_RATE", "1.0"))
-SERVICE_PORT = int(os.getenv("SERVICE_PORT", "8005"))
+SERVICE_PORT = int(os.getenv("SERVICE_PORT", "8003"))
 
 http_client = httpx.AsyncClient(timeout=10.0)
 pg_pool = None
