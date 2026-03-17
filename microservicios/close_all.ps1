@@ -1,0 +1,1 @@
+Get-Process -Name "powershell" | Where-Object { $_.MainWindowTitle -like "*TraceFlow*" } | Stop-Process

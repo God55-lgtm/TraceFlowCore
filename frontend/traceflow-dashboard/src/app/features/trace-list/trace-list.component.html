@@ -1,0 +1,124 @@
+<div class="list-container">
+  <h1>Trazas</h1>
+
+  <mat-card class="filter-card">
+    <mat-card-content>
+      <form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+        <div class="flex-row flex-wrap gap-16 filter-row">
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Trace ID</mat-label>
+            <input matInput formControlName="trace_id">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Servicio</mat-label>
+            <input matInput formControlName="service">
+          </mat-form-field>
+
+          <!-- Nuevo filtro por path -->
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Path</mat-label>
+            <input matInput formControlName="path" placeholder="/api/products">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Fecha inicio</mat-label>
+            <input matInput [matDatepicker]="startPicker" formControlName="start_date">
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Fecha fin</mat-label>
+            <input matInput [matDatepicker]="endPicker" formControlName="end_date">
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="status_code">
+              <mat-option value="">Todos</mat-option>
+              <mat-option value="200">200 OK</mat-option>
+              <mat-option value="400">400 Bad Request</mat-option>
+              <mat-option value="401">401 Unauthorized</mat-option>
+              <mat-option value="403">403 Forbidden</mat-option>
+              <mat-option value="404">404 Not Found</mat-option>
+              <mat-option value="500">500 Server Error</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex-row justify-end gap-8">
+          <button mat-raised-button color="primary" type="submit">Buscar</button>
+          <button mat-button type="button" (click)="resetFilter()">Limpiar</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <mat-card-content>
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" matSort class="full-width">
+          <ng-container matColumnDef="trace_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Trace ID</th>
+            <td mat-cell *matCellDef="let trace">{{ trace.trace_id | slice:0:16 }}...</td>
+          </ng-container>
+
+          <ng-container matColumnDef="service">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Servicio</th>
+            <td mat-cell *matCellDef="let trace">{{ trace.service }}</td>
+          </ng-container>
+
+          <!-- Nueva columna Path -->
+          <ng-container matColumnDef="path">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Path</th>
+            <td mat-cell *matCellDef="let trace" class="path-cell" [title]="trace.data?.path">
+              {{ trace.data?.path || '---' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="duration_ms">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Duración (ms)</th>
+            <td mat-cell *matCellDef="let trace">{{ trace.duration_ms }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status_code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let trace">
+              <span class="status-badge" [ngClass]="getStatusClass(trace.status_code)">
+                {{ trace.status_code }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+            <td mat-cell *matCellDef="let trace">{{ trace.created_at | date:'medium' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let trace">
+              <button mat-icon-button color="primary" (click)="viewTrace(trace.trace_id)" matTooltip="Ver detalle">
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              No hay trazas que coincidan con los filtros.
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <mat-paginator [pageSizeOptions]="[10,25,50,100]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

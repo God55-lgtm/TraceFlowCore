@@ -1,0 +1,16 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Clases de utilidad flex (reemplazan a Flex Layout) */
+.flex-row { display: flex; flex-direction: row; }
+.flex-column { display: flex; flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.gap-8 { gap: 8px; }
+.gap-16 { gap: 16px; }
+.gap-24 { gap: 24px; }
+.justify-end { justify-content: flex-end; }
+.align-center { align-items: center; }
+.full-width { width: 100%; }
+.text-center { text-align: center; }

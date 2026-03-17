@@ -1,0 +1,64 @@
+<div class="detail-container" *ngIf="!loading; else loadingTemplate">
+  <div class="flex-row align-center gap-16 detail-header">
+    <button mat-icon-button (click)="goBack()"><mat-icon>arrow_back</mat-icon></button>
+    <h1>Detalle: {{ traceId | slice:0:16 }}...</h1>
+  </div>
+
+  <mat-card class="graph-card">
+    <mat-card-header><mat-icon mat-card-avatar>device_hub</mat-icon> Grafo de llamadas</mat-card-header>
+    <mat-card-content><div id="graph-container" class="graph-container"></div></mat-card-content>
+  </mat-card>
+
+  <mat-card class="waterfall-card">
+    <mat-card-header><mat-icon mat-card-avatar>timeline</mat-icon> Línea de tiempo</mat-card-header>
+    <mat-card-content>
+      <div class="chart-container">
+        <canvas id="waterfallCanvas"></canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="spans-card">
+    <mat-card-header><mat-icon mat-card-avatar>list</mat-icon> Spans</mat-card-header>
+    <mat-card-content>
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="full-width">
+          <ng-container matColumnDef="span_id">
+            <th mat-header-cell *matHeaderCellDef>Span ID</th>
+            <td mat-cell *matCellDef="let span">{{ span.span_id }}</td>
+          </ng-container>
+          <ng-container matColumnDef="parent">
+            <th mat-header-cell *matHeaderCellDef>Padre</th>
+            <td mat-cell *matCellDef="let span">{{ span.parent_span_id || '---' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="service">
+            <th mat-header-cell *matHeaderCellDef>Servicio</th>
+            <td mat-cell *matCellDef="let span">{{ span.service }}</td>
+          </ng-container>
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef>Duración (ms)</th>
+            <td mat-cell *matCellDef="let span">{{ span.duration_ms }}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let span">{{ span.status_code }}</td>
+          </ng-container>
+          <ng-container matColumnDef="path">
+            <th mat-header-cell *matHeaderCellDef>Path</th>
+            <td mat-cell *matCellDef="let span">{{ span.data?.path || '---' }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['span_id','parent','service','duration','status','path']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['span_id','parent','service','duration','status','path'];"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="flex-column align-center justify-center loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Cargando...</p>
+  </div>
+</ng-template>

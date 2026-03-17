@@ -1,0 +1,34 @@
+<div class="dashboard-container">
+  <h1>Dashboard</h1>
+
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <mat-card-header><mat-icon mat-card-avatar>timeline</mat-icon> Total Trazas</mat-card-header>
+      <mat-card-content><div class="stat-value">{{ totalTraces }}</div></mat-card-content>
+    </mat-card>
+    <mat-card class="stat-card">
+      <mat-card-header><mat-icon mat-card-avatar>access_time</mat-icon> Última Hora</mat-card-header>
+      <mat-card-content><div class="stat-value">{{ tracesLastHour }}</div></mat-card-content>
+    </mat-card>
+    <mat-card class="stat-card">
+      <mat-card-header><mat-icon mat-card-avatar>dns</mat-icon> Servicios Activos</mat-card-header>
+      <mat-card-content><div class="stat-value">{{ services.length }}</div></mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="!loading" class="chart-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>bar_chart</mat-icon>
+      {{ hasServices ? 'Trazas por servicio' : 'No hay servicios disponibles' }}
+    </mat-card-header>
+    <mat-card-content>
+      <div class="chart-container">
+        <canvas #chartCanvas></canvas>
+      </div>
+      <div *ngIf="!hasServices" class="no-data-message">
+        <p>No se encontraron servicios activos en el sistema.</p>
+        <p>Los datos aparecerán cuando los microservicios comiencen a enviar trazas.</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

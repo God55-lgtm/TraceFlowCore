@@ -1,0 +1,64 @@
+.list-container {
+  padding: 20px;
+}
+
+.filter-card {
+  margin-bottom: 20px;
+}
+
+.filter-row {
+  margin-bottom: 16px;
+}
+
+.filter-field {
+  flex: 1 1 200px;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.status-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.status-client-error {
+  background-color: #ff9800;
+  color: white;
+}
+
+.status-server-error {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Estilo para la celda de path (con tooltip y truncado) */
+.path-cell {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .path-cell {
+    max-width: 150px;
+  }
+  
+  .filter-field {
+    flex: 1 1 100%;
+  }
+}
