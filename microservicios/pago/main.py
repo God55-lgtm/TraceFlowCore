@@ -48,6 +48,12 @@ class PaymentResponse(BaseModel):
     method: str
     timestamp: float
 
+def get_fake_ip_for_user(user_id: int = None) -> str:
+    ip_map = {1: "192.168.1.10", 2: "192.168.1.20", 3: "192.168.1.30", 4: "192.168.1.40", 5: "192.168.1.50"}
+    if user_id and user_id in ip_map:
+        return ip_map[user_id]
+    return f"192.168.1.{random.randint(2, 254)}"
+
 # ------------------------------------------------------------
 # Funciones de base de datos y trazabilidad
 # ------------------------------------------------------------
@@ -70,7 +76,7 @@ async def insert_span(span_data: dict):
                 json.dumps(span_data)
             )
     except Exception as e:
-        print(f"❌ [PAGO] Error insertando traza: {e}")
+        print(f"[ERROR] Error insertando traza: {e}")
 
 def generate_trace_id():
     return uuid.uuid4().hex[:32]
@@ -124,6 +130,13 @@ async def trace_middleware(request: Request, call_next):
     response = await call_next(request)
 
     duration = time.time() - request.state.span_start
+
+    client_ip = request.headers.get("X-Forwarded-For")
+    if client_ip:
+        client_ip = client_ip.split(",")[0].strip()
+    else:
+        client_ip = request.client.host
+
     span_data = {
         "trace_id": trace_context["trace_id"],
         "span_id": trace_context["span_id"],
@@ -134,6 +147,7 @@ async def trace_middleware(request: Request, call_next):
         "status_code": response.status_code,
         "duration_ms": int(duration * 1000),
         "user_id": None,
+        "client_ip": client_ip,
         "timestamp": time.time(),
         "tracestate": trace_context.get("tracestate"),
     }
@@ -147,13 +161,12 @@ async def trace_middleware(request: Request, call_next):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    print(f"✅ {SERVICE_NAME} iniciado en puerto {SERVICE_PORT}")
+    print(f"[OK] {SERVICE_NAME} iniciado en puerto {SERVICE_PORT}")
     task = asyncio.create_task(generate_payment_activity())
     yield
     task.cancel()
     await close_db()
     await http_client.aclose()
-
 
 # ------------------------------------------------------------
 # Crear aplicación
@@ -230,21 +243,23 @@ async def simulate_payment(action: str):
     amount = round(random.uniform(10, 500), 2)
     user_id = random.randint(1, 5)
     method = random.choice(["visa", "mastercard", "paypal"])
+    fake_ip = get_fake_ip_for_user(user_id)
 
-    print(f"💳 [PAGO] Simulando {action} para usuario {user_id}, monto {amount}")
+    headers = {"X-Forwarded-For": fake_ip}
+
+    print(f"[PAGO] Simulando {action} para usuario {user_id}, monto {amount} (IP {fake_ip})")
 
     async with httpx.AsyncClient(base_url=f"http://localhost:{SERVICE_PORT}") as client:
         try:
             if action == "pago_exitoso":
-                await client.post("/pay", json={"amount": amount, "user_id": user_id, "method": method})
+                await client.post("/pay", json={"amount": amount, "user_id": user_id, "method": method}, headers=headers)
             elif action == "saldo_insuficiente":
-                await client.post("/pay", json={"amount": 10000, "user_id": user_id, "method": method})
+                await client.post("/pay", json={"amount": 10000, "user_id": user_id, "method": method}, headers=headers)
             elif action == "error_banco":
-                await client.post("/pay", json={"amount": amount, "user_id": user_id, "method": "invalid"})
+                await client.post("/pay", json={"amount": amount, "user_id": user_id, "method": "invalid"}, headers=headers)
             elif action == "timeout":
-                await client.post("/pay", json={"amount": amount, "user_id": user_id, "method": method})
+                await client.post("/pay", json={"amount": amount, "user_id": user_id, "method": method}, headers=headers)
             elif action == "pago_rechazado":
-                await client.post("/pay", json={"amount": amount, "user_id": user_id, "method": method, "cvv": "000"})
+                await client.post("/pay", json={"amount": amount, "user_id": user_id, "method": method, "cvv": "000"}, headers=headers)
         except Exception as e:
-            print(f"⚠️ [PAGO] Error en simulación: {e}")
-
+            print(f"[WARN] Error en simulación: {e}")

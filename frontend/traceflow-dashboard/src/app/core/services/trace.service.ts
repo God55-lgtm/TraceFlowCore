@@ -7,6 +7,7 @@ export interface Trace {
   trace_id: string;
   span_id: string;
   parent_span_id: string | null;
+  client_ip?: string; 
   service: string;
   duration_ms: number;
   status_code: number;

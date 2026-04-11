@@ -6,6 +6,7 @@ class Trace(models.Model):
     parent_span_id = models.CharField(max_length=16, null=True, blank=True)
     data = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    # client_ip = models.CharField(max_length=45, null=True, blank=True, db_index=True)
 
     class Meta:
         db_table = 'traces'

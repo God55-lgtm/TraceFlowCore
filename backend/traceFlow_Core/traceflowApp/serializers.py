@@ -10,6 +10,7 @@ class TraceSerializer(serializers.ModelSerializer):
     service = serializers.SerializerMethodField()
     duration_ms = serializers.SerializerMethodField()
     status_code = serializers.SerializerMethodField()
+    client_ip = serializers.SerializerMethodField()
 
     class Meta:
         model = Trace
@@ -20,8 +21,9 @@ class TraceSerializer(serializers.ModelSerializer):
             'service',
             'duration_ms',
             'status_code',
+            'client_ip',
             'created_at',
-            'data',  # opcional, se puede omitir si no se quiere enviar todo el JSON
+            'data',
         ]
         read_only_fields = ['created_at']
 
@@ -33,3 +35,6 @@ class TraceSerializer(serializers.ModelSerializer):
 
     def get_status_code(self, obj):
         return obj.data.get('status_code', 200)
+    
+    def get_client_ip(self, obj):
+        return obj.data.get('client_ip', None)

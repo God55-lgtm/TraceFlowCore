@@ -47,6 +47,10 @@
             <th mat-header-cell *matHeaderCellDef>Path</th>
             <td mat-cell *matCellDef="let span">{{ span.data?.path || '---' }}</td>
           </ng-container>
+          <ng-container matColumnDef="client_ip">
+            <th mat-header-cell *matHeaderCellDef>IP Cliente</th>
+            <td mat-cell *matCellDef="let span">{{ span.client_ip || '---' }}</td>
+          </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="['span_id','parent','service','duration','status','path']"></tr>
           <tr mat-row *matRowDef="let row; columns: ['span_id','parent','service','duration','status','path'];"></tr>

@@ -59,6 +59,12 @@ default_users = [
     {"username": "jose.rodriguez", "password": "JoseR1234", "email": "jose.r@email.com"},
 ]
 
+def get_fake_ip_for_user(user_id: int = None) -> str:
+    ip_map = {1: "192.168.1.10", 2: "192.168.1.20", 3: "192.168.1.30", 4: "192.168.1.40", 5: "192.168.1.50"}
+    if user_id and user_id in ip_map:
+        return ip_map[user_id]
+    return f"192.168.1.{random.randint(2, 254)}"
+
 # Modelos
 class UserRegister(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
@@ -132,7 +138,7 @@ async def init_db():
                     "INSERT INTO users (username, password_hash, email) VALUES ($1, $2, $3)",
                     user["username"], password_hash, user["email"]
                 )
-                print(f"✅ Usuario '{user['username']}' creado")
+                print(f"[OK] Usuario '{user['username']}' creado")
 
 async def close_db():
     if pg_pool:
@@ -172,7 +178,7 @@ async def insert_span(span_data: dict):
                 json.dumps(span_data)
             )
     except Exception as e:
-        print(f"❌ Error insertando traza: {e}")
+        print(f"[ERROR] Error insertando traza: {e}")
 
 # ------------------------------------------------------------
 # Utilidades de trazabilidad
@@ -229,6 +235,13 @@ async def trace_middleware(request: Request, call_next):
     response = await call_next(request)
 
     duration = time.time() - request.state.span_start
+
+    client_ip = request.headers.get("X-Forwarded-For")
+    if client_ip:
+        client_ip = client_ip.split(",")[0].strip()
+    else:
+        client_ip = request.client.host
+
     span_data = {
         "trace_id": trace_context["trace_id"],
         "span_id": trace_context["span_id"],
@@ -239,6 +252,7 @@ async def trace_middleware(request: Request, call_next):
         "status_code": response.status_code,
         "duration_ms": int(duration * 1000),
         "user_id": None,
+        "client_ip": client_ip,
         "timestamp": time.time(),
         "tracestate": trace_context.get("tracestate"),
     }
@@ -297,14 +311,13 @@ def _clear_cart(user_id: int):
     if user_id in carts:
         del carts[user_id]
 
-
 # ------------------------------------------------------------
 # Lifespan
 # ------------------------------------------------------------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    print(f"✅ {SERVICE_NAME} iniciado en puerto {SERVICE_PORT}")
+    print(f"[OK] {SERVICE_NAME} iniciado en puerto {SERVICE_PORT}")
     print(f"   Generando flujos automáticos cada 30 segundos")
 
     task = asyncio.create_task(generate_auto_flows())
@@ -367,7 +380,7 @@ async def login(request: Request, user: UserLogin):
     except HTTPException:
         raise
     except Exception as e:
-        print(f"❌ Error en login: {e}")
+        print(f"[ERROR] Error en login: {e}")
         raise HTTPException(status_code=500, detail="Error interno del servidor")
 
 # ------------------------------------------------------------
@@ -541,7 +554,7 @@ async def notify_endpoint(request: Request):
     total = data.get("total")
     items = data.get("items", [])
 
-    print(f"📧 Notificación enviada al usuario {user_id}: {message} (total: {total})")
+    print(f"[NOTIFICACION] Enviada al usuario {user_id}: {message} (total: {total})")
     for it in items:
         print(f"   - {it['name']} x{it['qty']}")
 
@@ -583,7 +596,7 @@ async def generate_auto_flows():
         await asyncio.sleep(30)
         username = random.choice(users_list)
         flow = random.choice(flow_types)
-        print(f"🔄 Generando flujo automático: {username} - {flow}")
+        print(f"[FLUJO] Generando flujo automático: {username} - {flow}")
         tasks = []
         tasks.append(generate_flow(username, flow))
         await asyncio.gather(*tasks, return_exceptions=True)
@@ -592,10 +605,20 @@ async def generate_flow(username: str, flow_type: str):
     base_url = f"http://localhost:{SERVICE_PORT}"
     headers = {}
 
+    user_map = {
+        "ricardo.perez": 1,
+        "ana.garcia": 2,
+        "carlos.lopez": 3,
+        "laura.martin": 4,
+        "jose.rodriguez": 5
+    }
+    user_id = user_map.get(username, 1)
+    fake_ip = get_fake_ip_for_user(user_id)
+    headers["X-Forwarded-For"] = fake_ip
+
     async with httpx.AsyncClient(base_url=base_url) as client:
         try:
-            # Intentos de login
-            await client.post("/login", json={"username": username, "password": "wrong"})
+            await client.post("/login", json={"username": username, "password": "wrong"}, headers=headers)
 
             if username == "ricardo.perez":
                 pwd = "Ricardo123!"
@@ -608,9 +631,9 @@ async def generate_flow(username: str, flow_type: str):
             else:
                 pwd = "JoseR1234"
 
-            login_resp = await client.post("/login", json={"username": username, "password": pwd})
+            login_resp = await client.post("/login", json={"username": username, "password": pwd}, headers=headers)
             if login_resp.status_code != 200:
-                print(f"❌ Error login en flujo automático: {login_resp.status_code}")
+                print(f"[ERROR] Error login en flujo automático: {login_resp.status_code}")
                 return
             token = login_resp.json().get("access_token")
             headers["Authorization"] = f"Bearer {token}"
@@ -640,4 +663,3 @@ async def generate_flow(username: str, flow_type: str):
 
         except Exception as e:
             print(f"Error en flujo automático: {e}")
-

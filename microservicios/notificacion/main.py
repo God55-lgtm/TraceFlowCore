@@ -6,7 +6,7 @@ import asyncio
 import json
 import httpx
 from datetime import datetime
-from fastapi import FastAPI, Request, HTTPException, BackgroundTasks
+from fastapi import FastAPI, Request, HTTPException
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from pydantic import BaseModel
@@ -37,6 +37,12 @@ class NotificationResponse(BaseModel):
     channels_sent: List[str]
     timestamp: float
 
+def get_fake_ip_for_user(user_id: int = None) -> str:
+    ip_map = {1: "192.168.1.10", 2: "192.168.1.20", 3: "192.168.1.30", 4: "192.168.1.40", 5: "192.168.1.50"}
+    if user_id and user_id in ip_map:
+        return ip_map[user_id]
+    return f"192.168.1.{random.randint(2, 254)}"
+
 # ------------------------------------------------------------
 # Funciones de base de datos y trazabilidad
 # ------------------------------------------------------------
@@ -49,7 +55,7 @@ async def close_db():
         await pg_pool.close()
 
 async def insert_span(span_data: dict):
-    print(f"📝 [NOTIFICACION] Intentando insertar traza {span_data['trace_id']}...")
+    print(f"[INFO] Intentando insertar traza {span_data['trace_id']}...")
     try:
         async with pg_pool.acquire() as conn:
             await conn.execute(
@@ -59,9 +65,9 @@ async def insert_span(span_data: dict):
                 span_data.get("parent_span_id"),
                 json.dumps(span_data)
             )
-        print("✅ [NOTIFICACION] Inserción exitosa")
+        print("[OK] Inserción exitosa")
     except Exception as e:
-        print(f"❌ [NOTIFICACION] Error insertando traza: {e}")
+        print(f"[ERROR] Error insertando traza: {e}")
 
 def generate_trace_id():
     return uuid.uuid4().hex[:32]
@@ -84,7 +90,7 @@ def inject_trace_headers(trace_context: dict, headers: dict) -> dict:
 # Middleware de trazabilidad
 # ------------------------------------------------------------
 async def trace_middleware(request: Request, call_next):
-    print(f"🔍 [NOTIFICACION] Middleware ejecutándose para {request.method} {request.url.path}")
+    print(f"[INFO] Middleware ejecutándose para {request.method} {request.url.path}")
     traceparent = request.headers.get("traceparent")
     tracestate = request.headers.get("tracestate")
 
@@ -116,6 +122,13 @@ async def trace_middleware(request: Request, call_next):
     response = await call_next(request)
 
     duration = time.time() - request.state.span_start
+
+    client_ip = request.headers.get("X-Forwarded-For")
+    if client_ip:
+        client_ip = client_ip.split(",")[0].strip()
+    else:
+        client_ip = request.client.host
+
     span_data = {
         "trace_id": trace_context["trace_id"],
         "span_id": trace_context["span_id"],
@@ -126,6 +139,7 @@ async def trace_middleware(request: Request, call_next):
         "status_code": response.status_code,
         "duration_ms": int(duration * 1000),
         "user_id": None,
+        "client_ip": client_ip,
         "timestamp": time.time(),
         "tracestate": trace_context.get("tracestate"),
     }
@@ -139,7 +153,7 @@ async def trace_middleware(request: Request, call_next):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    print(f"✅ {SERVICE_NAME} iniciado en puerto {SERVICE_PORT}")
+    print(f"[OK] {SERVICE_NAME} iniciado en puerto {SERVICE_PORT}")
     task = asyncio.create_task(generate_notification_activity())
     yield
     task.cancel()
@@ -167,7 +181,7 @@ async def notify(request: Request, notification: NotificationRequest):
         raise HTTPException(status_code=500, detail="Error simulado en notificación")
 
     notification_id = str(uuid.uuid4())
-    print(f"📧 [NOTIFICACION] Enviada a usuario {user_id}: {notif_type} - {data}")
+    print(f"[NOTIFICACION] Enviada a usuario {user_id}: {notif_type} - {data}")
 
     return NotificationResponse(
         id=notification_id,
@@ -204,10 +218,12 @@ async def simulate_notification(notif_type: str):
     elif notif_type == "pago_recibido":
         data = {"amount": round(random.uniform(10, 200), 2)}
 
-    print(f"📧 [NOTIFICACION] Simulando {notif_type} para usuario {user_id}")
+    fake_ip = get_fake_ip_for_user(user_id)
+    headers = {"X-Forwarded-For": fake_ip}
+
+    print(f"[NOTIFICACION] Simulando {notif_type} para usuario {user_id} (IP {fake_ip})")
     async with httpx.AsyncClient(base_url=f"http://localhost:{SERVICE_PORT}") as client:
         try:
-            await client.post("/notify", json={"user_id": user_id, "type": notif_type, "data": data})
+            await client.post("/notify", json={"user_id": user_id, "type": notif_type, "data": data}, headers=headers)
         except Exception as e:
-            print(f"⚠️ [NOTIFICACION] Error en simulación: {e}")
-
+            print(f"[WARN] Error en simulación: {e}")

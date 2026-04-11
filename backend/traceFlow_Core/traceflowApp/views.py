@@ -29,6 +29,7 @@ class TraceListView(APIView):
     def get(self, request):
         trace_id = request.query_params.get('trace_id')
         service = request.query_params.get('service')
+        client_ip = request.query_params.get('client_ip')
         start_date = request.query_params.get('start_date')
         end_date = request.query_params.get('end_date')
         limit = int(request.query_params.get('limit', 100))
@@ -40,6 +41,8 @@ class TraceListView(APIView):
         if service:
             # Filtrar dentro del campo JSON
             queryset = queryset.filter(data__service_name=service)
+        if client_ip:
+            queryset = queryset.filter(data__client_ip=client_ip)
         if start_date and end_date:
             queryset = queryset.filter(created_at__range=[start_date, end_date])
 

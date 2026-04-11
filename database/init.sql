@@ -93,6 +93,6 @@ ON CONFLICT DO NOTHING;
 -- =====================================================
 -- Verificación final
 -- =====================================================
-SELECT '✅ Base de datos traceflow_db inicializada correctamente' AS mensaje;
+SELECT 'ok Base de datos traceflow_db inicializada correctamente' AS mensaje;
 SELECT '   - Tabla traces: ' || (SELECT COUNT(*) FROM traces) || ' registros' AS info;
 SELECT '   - Tabla users:  ' || (SELECT COUNT(*) FROM users) || ' registros' AS info;

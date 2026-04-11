@@ -40,7 +40,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class TraceListComponent implements OnInit, OnDestroy {
   // Añadido 'path' a las columnas
-  displayedColumns: string[] = ['trace_id', 'service', 'path', 'duration_ms', 'status_code', 'created_at', 'actions'];
+  // displayedColumns: string[] = ['trace_id', 'service', 'path', 'duration_ms', 'status_code', 'created_at', 'actions'];
+  displayedColumns: string[] = ['trace_id', 'service', 'path', 'duration_ms', 'status_code', 'created_at', 'client_ip', 'actions'];
   dataSource = new MatTableDataSource<Trace>([]);
   filterForm: FormGroup;
   loading = true;

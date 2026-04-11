@@ -19,5 +19,5 @@ for svc in services:
     # En Windows, START abre una nueva ventana de cmd
     subprocess.Popen(f'start "TraceFlow - {svc["name"]}" cmd /k "{cmd}"', shell=True)
 
-print("✅ Microservicios lanzados en ventanas separadas.")
+print("ok Microservicios lanzados en ventanas separadas.")
 print("Cierra cada ventana manualmente para detener el servicio.")

@@ -61,6 +61,12 @@ class ProductCreate(BaseModel):
     stock: int
     category: str
 
+def get_fake_ip_for_user(user_id: int = None) -> str:
+    ip_map = {1: "192.168.1.10", 2: "192.168.1.20", 3: "192.168.1.30", 4: "192.168.1.40", 5: "192.168.1.50"}
+    if user_id and user_id in ip_map:
+        return ip_map[user_id]
+    return f"192.168.1.{random.randint(2, 254)}"
+
 # ------------------------------------------------------------
 # Funciones de base de datos y trazabilidad
 # ------------------------------------------------------------
@@ -83,7 +89,7 @@ async def insert_span(span_data: dict):
                 json.dumps(span_data)
             )
     except Exception as e:
-        print(f"❌ [INVENTARIO] Error insertando traza: {e}")
+        print(f"[ERROR] Error insertando traza: {e}")
 
 def generate_trace_id():
     return uuid.uuid4().hex[:32]
@@ -137,6 +143,13 @@ async def trace_middleware(request: Request, call_next):
     response = await call_next(request)
 
     duration = time.time() - request.state.span_start
+
+    client_ip = request.headers.get("X-Forwarded-For")
+    if client_ip:
+        client_ip = client_ip.split(",")[0].strip()
+    else:
+        client_ip = request.client.host
+
     span_data = {
         "trace_id": trace_context["trace_id"],
         "span_id": trace_context["span_id"],
@@ -147,6 +160,7 @@ async def trace_middleware(request: Request, call_next):
         "status_code": response.status_code,
         "duration_ms": int(duration * 1000),
         "user_id": None,
+        "client_ip": client_ip,
         "timestamp": time.time(),
         "tracestate": trace_context.get("tracestate"),
     }
@@ -160,7 +174,7 @@ async def trace_middleware(request: Request, call_next):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    print(f"✅ {SERVICE_NAME} iniciado en puerto {SERVICE_PORT}")
+    print(f"[OK] {SERVICE_NAME} iniciado en puerto {SERVICE_PORT}")
     task = asyncio.create_task(generate_inventory_activity())
     yield
     task.cancel()
@@ -273,25 +287,28 @@ async def generate_inventory_activity():
 async def simulate_inventory(action: str):
     product_id = random.randint(1, 10)
     quantity = random.randint(1, 5)
+    user_id = random.randint(1, 5)
+    fake_ip = get_fake_ip_for_user(user_id)
 
-    print(f"📦 [INVENTARIO] Simulando {action} para producto {product_id}")
+    headers = {"X-Forwarded-For": fake_ip}
+
+    print(f"[INVENTARIO] Simulando {action} para producto {product_id} (IP {fake_ip})")
 
     async with httpx.AsyncClient(base_url=f"http://localhost:{SERVICE_PORT}") as client:
         try:
             if action == "consulta_stock":
-                await client.get(f"/stock/{product_id}")
+                await client.get(f"/stock/{product_id}", headers=headers)
             elif action == "reserva_exitosa":
-                await client.post("/reserve", json={"items": [{"product_id": product_id, "quantity": quantity}]})
+                await client.post("/reserve", json={"items": [{"product_id": product_id, "quantity": quantity}]}, headers=headers)
             elif action == "stock_insuficiente":
-                await client.post("/reserve", json={"items": [{"product_id": product_id, "quantity": 100}]})
+                await client.post("/reserve", json={"items": [{"product_id": product_id, "quantity": 100}]}, headers=headers)
             elif action == "crear_producto":
                 new_product = {"name": f"Producto Test {random.randint(100,999)}", "price": round(random.uniform(10, 200), 2), "stock": random.randint(5, 50), "category": random.choice(["Electrónica", "Ropa", "Libros"])}
-                await client.post("/admin/products", json=new_product)
+                await client.post("/admin/products", json=new_product, headers=headers)
             elif action == "actualizar_stock":
                 new_stock = random.randint(10, 100)
-                await client.put(f"/admin/products/{product_id}/stock", json={"product_id": product_id, "new_stock": new_stock})
+                await client.put(f"/admin/products/{product_id}/stock", json={"product_id": product_id, "new_stock": new_stock}, headers=headers)
             elif action == "cancelar_reserva":
-                await client.post("/cancel", json=[{"product_id": product_id, "quantity": quantity}])
+                await client.post("/cancel", json=[{"product_id": product_id, "quantity": quantity}], headers=headers)
         except Exception as e:
-            print(f"⚠️ [INVENTARIO] Error en simulación: {e}")
-
+            print(f"[WARN] Error en simulación: {e}")
