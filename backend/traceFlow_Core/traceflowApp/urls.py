@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+from rest_framework_simplejwt.views import TokenRefreshView
+
 urlpatterns = [
     path('health/', views.HealthCheckView.as_view(), name='health'),
     path('traces/', views.TraceListView.as_view(), name='trace-list'),
@@ -8,4 +10,7 @@ urlpatterns = [
     path('metrics/', views.MetricsView.as_view(), name='metrics'),
     path('traces-per-service/', views.TracesPerServiceView.as_view(), name='traces-per-service'),
     path('purge/', views.PurgeTracesView.as_view(), name='purge'),
+    
+    path('traces/<str:trace_id>/hash/', views.TraceHashView.as_view(), name='trace-hash'),
+    
 ]

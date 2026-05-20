@@ -1,8 +1,14 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TraceService } from '../../core/services/trace.service';
+import { AuthService } from '../../core/services/auth.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -10,7 +16,16 @@ import Chart from 'chart.js/auto';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
+  ]
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
@@ -18,20 +33,43 @@ export class DashboardComponent implements OnInit {
 
   totalTraces = 0;
   tracesLastHour = 0;
-  services: string[] = [];
   servicesData: { name: string; count: number }[] = [];
-  loading = true;
   hasServices = false;
+  loading = true;
 
-  constructor(private traceService: TraceService) {}
+  // Purga
+  purgeDate: Date | null = null;
+  purging = false;
+  purgeResult: { success: boolean; message: string } | null = null;
+  isAdmin = false;
+
+  constructor(
+    private traceService: TraceService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loadMetrics();
     this.loadTracesPerService();
+    this.checkAdminRole();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => this.createChart(), 500);
+  }
+
+  checkAdminRole(): void {
+    const token = this.authService.getAccessToken();
+    if (token) {
+      try {       
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        
+        // Ajusta según el campo que use tu backend: role, groups, is_staff, etc.
+        this.isAdmin = true
+      } catch (e) {
+        console.error('Error decodificando token', e);
+      }
+    }
   }
 
   loadMetrics(): void {
@@ -39,10 +77,7 @@ export class DashboardComponent implements OnInit {
       next: (data) => {
         this.totalTraces = data.total_traces;
         this.tracesLastHour = data.traces_last_hour;
-        this.services = data.services || [];
-        this.hasServices = this.services.length > 0;
         this.loading = false;
-        this.updateChart();
       },
       error: (err) => {
         console.error('Error cargando métricas:', err);
@@ -55,20 +90,13 @@ export class DashboardComponent implements OnInit {
     this.traceService.getTracesPerService().subscribe({
       next: (data) => {
         this.servicesData = data;
-        this.services = data.map(item => item.name);
-        this.hasServices = this.services.length > 0;
+        this.hasServices = this.servicesData.length > 0;
         this.updateChart();
       },
       error: (err) => {
         console.error('Error cargando trazas por servicio:', err);
-        // Si falla, usar datos simulados como respaldo
-        if (this.services.length > 0) {
-          this.servicesData = this.services.map(name => ({
-            name,
-            count: Math.floor(Math.random() * 100) + 1
-          }));
-          this.updateChart();
-        }
+        this.hasServices = false;
+        this.updateChart();
       }
     });
   }
@@ -80,9 +108,7 @@ export class DashboardComponent implements OnInit {
     const data = this.hasServices ? this.servicesData.map(d => d.count) : [0];
     const backgroundColor = this.hasServices ? '#3f51b5' : '#cccccc';
 
-    if (this.chart) {
-      this.chart.destroy();
-    }
+    if (this.chart) this.chart.destroy();
 
     this.chart = new Chart(this.chartCanvas.nativeElement, {
       type: 'bar',
@@ -111,10 +137,7 @@ export class DashboardComponent implements OnInit {
           }
         },
         scales: {
-          y: { 
-            beginAtZero: true,
-            title: { display: true, text: 'Cantidad de trazas' }
-          }
+          y: { beginAtZero: true, title: { display: true, text: 'Cantidad de trazas' } }
         }
       }
     });
@@ -135,5 +158,32 @@ export class DashboardComponent implements OnInit {
     } else {
       setTimeout(() => this.createChart(), 100);
     }
+  }
+
+  purgeTraces(): void {
+    if (!this.purgeDate) return;
+    const formattedDate = this.purgeDate.toISOString().split('T')[2];
+    if (!confirm(`¿Eliminar permanentemente todas las trazas anteriores a ${formattedDate}? Esta acción no se puede deshacer.`)) {
+      return;
+    }
+
+    this.purging = true;
+    this.purgeResult = null;
+
+    this.traceService.purgeTraces(formattedDate).subscribe({
+      next: (res) => {
+        this.purging = false;
+        this.purgeResult = { success: true, message: `Se eliminaron ${res.deleted} trazas correctamente.` };
+        this.loadMetrics();
+        this.loadTracesPerService();
+        
+      },
+      error: (err) => {
+        this.purging = false;
+        const msg = err.error?.error || 'Error al purgar trazas. Intente de nuevo.';
+        this.purgeResult = { success: false, message: msg };
+        console.error('Error en purga:', err);
+      }
+    });
   }
 }

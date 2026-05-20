@@ -1,9 +1,11 @@
 import uuid
 import time
 import logging
+import random
 from django.utils.deprecation import MiddlewareMixin
 from django.conf import settings
-from .models import Trace  # <--- Importación necesaria para guardar directo
+from .models import Trace
+from . import context   # Importa el módulo para atributos personalizados
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +39,10 @@ class TraceFlowMiddleware(MiddlewareMixin):
         request.should_sample = self.should_sample()
         if not request.should_sample:
             # Si no se muestrea, no hacemos nada más
-            return 
+            return
+
+        # Inicializar atributos personalizados para este span
+        context.clear_attributes()
 
         # Almacenar tiempo de inicio
         request._trace_start_time = time.time()
@@ -45,8 +50,10 @@ class TraceFlowMiddleware(MiddlewareMixin):
     def process_response(self, request, response):
         if hasattr(request, '_trace_start_time') and request.should_sample:
             duration = time.time() - request._trace_start_time
-            # Guardar span directamente en BD 
+            # Guardar span directamente en BD (o enviar a Celery)
             self.record_span_direct(request, response, duration)
+        # Limpiar atributos después de procesar la respuesta (por si acaso)
+        context.clear_attributes()
         return response
 
     def start_new_trace(self, request):
@@ -66,15 +73,18 @@ class TraceFlowMiddleware(MiddlewareMixin):
         return uuid.uuid4().hex[:16]
 
     def should_sample(self):
-        import random
-        return random.random() < getattr(settings, 'TRACE_SAMPLE_RATE', 1.0)
+        sample_rate = getattr(settings, 'TRACE_SAMPLE_RATE', 1.0)
+        return random.random() < sample_rate
 
     def record_span_direct(self, request, response, duration):
         """
         Guarda el span directamente en la base de datos (sin Celery).
         Para usar SOLO en desarrollo/pruebas.
         """
-        # Construir datos del span (AQUÍ SE DEFINE span_data)
+        # Obtener atributos personalizados desde el contexto
+        custom_attrs = context.get_attributes()
+
+        # Construir datos del span (incluyendo los personalizados)
         span_data = {
             'trace_id': request.trace_context['trace_id'],
             'span_id': request.trace_context['span_id'],
@@ -88,15 +98,13 @@ class TraceFlowMiddleware(MiddlewareMixin):
             'timestamp': time.time(),
             'tracestate': request.trace_context.get('tracestate'),
         }
+        # Añadir todos los atributos personalizados al diccionario
+        span_data.update(custom_attrs)
 
         try:
-            # Guardar directamente en la base de datos
-            Trace.objects.create(
-                trace_id=span_data['trace_id'],
-                span_id=span_data['span_id'],
-                parent_span_id=span_data.get('parent_span_id'),
-                data=span_data
-            )
+            Trace.objects.create(...)
             logger.debug(f"Span guardado directamente en BD: {span_data['trace_id']}")
         except Exception as e:
-            logger.error(f"Error guardando span en BD: {e}")
+            logger.error(f"Error guardando span en BD: {e}, guardando en buffer local")
+            from .buffer import save_to_buffer
+            save_to_buffer(span_data)

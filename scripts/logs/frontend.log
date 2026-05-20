@@ -1,27 +1,5 @@
 
---- Iniciando Frontend en 2026-04-11 16:16:20.188473 ---
-
-> traceflow-dashboard@0.0.0 start
-> ng serve
-
-[1m[33mComponent HMR has been enabled, see https://angular.dev/hmr for more info.[39m[22m
-[33m❯[39m Building...
-[32m✔[39m Building...
-[1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
-[32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
-[32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
-
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
-
-Application bundle generation complete. [12.143 seconds]
-
-Watch mode enabled. Watching for file changes...
-NOTE: Raw file sizes do not reflect development server per-request transformations.
-  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
-
---- Iniciando Frontend en 2026-04-25 01:38:40.924671 ---
+--- Iniciando Frontend en 2026-05-18 16:02:59.068185 ---
 
 > traceflow-dashboard@0.0.0 start
 > ng serve
@@ -30,22 +8,20 @@ NOTE: Raw file sizes do not reflect development server per-request transformatio
 [33m>[39m Building...
 [32m√[39m Building...
 [1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m122.78 kB[39m[2m | [22m
 [32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
 [32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
 
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
+[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m308.58 kB[22m
 
-Application bundle generation complete. [4.516 seconds]
+Application bundle generation complete. [2.319 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
-[2m1:38:48[22m [36m[1m[vite][22m[39m [34m[2m(ssr)[22m[39m Re-optimizing dependencies because vite config has changed
-[2m1:38:48[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
 [2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
 
---- Iniciando Frontend en 2026-04-25 01:42:10.943600 ---
+--- Iniciando Frontend en 2026-05-19 11:01:54.694522 ---
 
 > traceflow-dashboard@0.0.0 start
 > ng serve
@@ -54,174 +30,766 @@ NOTE: Raw file sizes do not reflect development server per-request transformatio
 [33m>[39m Building...
 [32m√[39m Building...
 [1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m122.78 kB[39m[2m | [22m
 [32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
 [32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
 
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
+[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m308.58 kB[22m
 
-Application bundle generation complete. [2.911 seconds]
+Application bundle generation complete. [18.846 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
 [2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [7.319 seconds]
 
---- Iniciando Frontend en 2026-04-25 01:49:05.660326 ---
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'applyFilter' does not exist on type 'TraceListComponent'.[0m [1m[35m[plugin angular-compiler][0m
 
-> traceflow-dashboard@0.0.0 start
-> ng serve
+    src/app/features/trace-list/trace-list.component.html:6:49:
+[37m      6 │       <form [formGroup]="filterForm" (ngSubmit)="[32mapplyFilter[37m()">
+        ╵                                                  [32m~~~~~~~~~~~[0m
 
-[1m[33mComponent HMR has been enabled, see https://angular.dev/hmr for more info.[39m[22m
-[33m>[39m Building...
-[32m√[39m Building...
+  Error occurs in the template of component TraceListComponent.
+
+    src/app/features/trace-list/trace-list.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./trace-list.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'resetFilter' does not exist on type 'TraceListComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.html:54:52:
+[37m      54 │ ... mat-button type="button" (click)="[32mresetFilter[37m()">Limpiar</button>
+         ╵                                       [32m~~~~~~~~~~~[0m
+
+  Error occurs in the template of component TraceListComponent.
+
+    src/app/features/trace-list/trace-list.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./trace-list.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'getStatusClass' does not exist on type 'TraceListComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.html:90:52:
+[37m      90 │ ...lass="status-badge" [ngClass]="[32mgetStatusClass[37m(trace.status_code)">
+         ╵                                   [32m~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component TraceListComponent.
+
+    src/app/features/trace-list/trace-list.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./trace-list.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG9: Property 'viewTrace' does not exist on type 'TraceListComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.html:109:63:
+[37m      109 │ ...n color="primary" (click)="[32mviewTrace[37m(trace.trace_id)" matToolt...
+          ╵                               [32m~~~~~~~~~[0m
+
+  Error occurs in the template of component TraceListComponent.
+
+    src/app/features/trace-list/trace-list.component.ts:21:15:
+[37m      21 │   templateUrl: [32m'./trace-list.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2420: Class 'TraceListComponent' incorrectly implements interface 'OnDestroy'.
+  Property 'ngOnDestroy' is missing in type 'TraceListComponent' but required in type 'OnDestroy'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:41:13:
+[37m      41 │ export class [32mTraceListComponent[37m implements OnInit, OnDestroy {
+         ╵              [32m~~~~~~~~~~~~~~~~~~[0m
+
+  'ngOnDestroy' is declared here.
+
+    node_modules/@angular/core/index.d.ts:6180:4:
+[37m      6180 │     [32mngOnDestroy(): void;[37m
+           ╵     [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2420: Class 'TraceListComponent' incorrectly implements interface 'OnInit'.
+  Property 'ngOnInit' is missing in type 'TraceListComponent' but required in type 'OnInit'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:41:13:
+[37m      41 │ export class [32mTraceListComponent[37m implements OnInit, OnDestroy {
+         ╵              [32m~~~~~~~~~~~~~~~~~~[0m
+
+  'ngOnInit' is declared here.
+
+    node_modules/@angular/core/index.d.ts:6122:4:
+[37m      6122 │     [32mngOnInit(): void;[37m
+           ╵     [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:58:36:
+[37m      58 │     this.filterForm = this.fb.group([32m{[37m
+         ╵                                     [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1136: Property assignment expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:61:19:
+[37m      61 │       path: [''],  [32m/[37m
+         ╵                    [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'start_date'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:62:6:
+[37m      62 │       [32mstart_date[37m: [''],
+         ╵       [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:62:16:
+[37m      62 │       start_date[32m:[37m [''],
+         ╵                 [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'end_date'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:63:6:
+[37m      63 │       [32mend_date[37m: [''],
+         ╵       [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2554: Expected 1-2 arguments, but got 6.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:63:6:
+[37m      63 │       [32mend_date: [''],[37m
+         ╵       [32m~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:63:14:
+[37m      63 │       end_date[32m:[37m [''],
+         ╵               [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'status_code'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:64:6:
+[37m      64 │       [32mstatus_code[37m: ['']
+         ╵       [32m~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:64:17:
+[37m      64 │       status_code[32m:[37m ['']
+         ╵                  [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:65:4:
+[37m      65 │     [32m}[37m);
+         ╵     [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1068: Unexpected token. A constructor, method, accessor, or property was expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:65:5:
+[37m      65 │     }[32m)[37m;
+         ╵      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'ngOnInit'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:68:2:
+[37m      68 │   [32mngOnInit[37m(): void {
+         ╵   [32m~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:68:12:
+[37m      68 │   ngOnInit()[32m:[37m void {
+         ╵             [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:69:8:
+[37m      69 │     this[32m.[37mloadTraces();
+         ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:69:21:
+[37m      69 │     this.loadTraces()[32m;[37m
+         ╵                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:71:8:
+[37m      71 │     this[32m.[37mrefreshInterval = setInterval(() => {
+         ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:72:6:
+[37m      72 │       [32mthis[37m.loadTraces();
+         ╵       [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:73:12:
+[37m      73 │     }, 5000)[32m;[37m
+         ╵             [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'ngAfterViewInit'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:76:2:
+[37m      76 │   [32mngAfterViewInit[37m(): void {
+         ╵   [32m~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:76:19:
+[37m      76 │   ngAfterViewInit()[32m:[37m void {
+         ╵                    [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:77:8:
+[37m      77 │     this[32m.[37mdataSource.paginator = this.paginator;
+         ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:77:32:
+[37m      77 │     this.dataSource.paginator = [32mthis[37m.paginator;
+         ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:77:46:
+[37m      77 │     this.dataSource.paginator = this.paginator[32m;[37m
+         ╵                                               [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:78:8:
+[37m      78 │     this[32m.[37mdataSource.sort = this.sort;
+         ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:78:27:
+[37m      78 │     this.dataSource.sort = [32mthis[37m.sort;
+         ╵                            [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:78:36:
+[37m      78 │     this.dataSource.sort = this.sort[32m;[37m
+         ╵                                     [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'ngOnDestroy'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:81:2:
+[37m      81 │   [32mngOnDestroy[37m(): void {
+         ╵   [32m~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:81:15:
+[37m      81 │   ngOnDestroy()[32m:[37m void {
+         ╵                [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:82:12:
+[37m      82 │     if (this[32m.[37mrefreshInterval) {
+         ╵             [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:82:28:
+[37m      82 │     if (this.refreshInterval[32m)[37m {
+         ╵                             [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1136: Property assignment expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:82:30:
+[37m      82 │     if (this.refreshInterval) [32m{[37m
+         ╵                               [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:83:20:
+[37m      83 │       clearInterval([32mthis[37m.refreshInterval);
+         ╵                     [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1128: Declaration or statement expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:85:2:
+[37m      85 │   [32m}[37m
+         ╵   [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'loadTraces'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:87:2:
+[37m      87 │   [32mloadTraces[37m(): void {
+         ╵   [32m~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:87:14:
+[37m      87 │   loadTraces()[32m:[37m void {
+         ╵               [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:88:8:
+[37m      88 │     this[32m.[37mtraceService.getTraces(this.filterForm.value).subscribe({
+         ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:88:32:
+[37m      88 │     this.traceService.getTraces([32mthis[37m.filterForm.value).subscribe({
+         ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'data' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:89:13:
+[37m      89 │       next: ([32mdata[37m) => {
+         ╵              [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:90:8:
+[37m      90 │         [32mthis[37m.dataSource.data = data;
+         ╵         [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:91:8:
+[37m      91 │         [32mthis[37m.loading = false;
+         ╵         [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'err' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:93:14:
+[37m      93 │       error: ([32merr[37m) => {
+         ╵               [32m~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:95:8:
+[37m      95 │         [32mthis[37m.loading = false;
+         ╵         [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:97:6:
+[37m      97 │     })[32m;[37m
+         ╵       [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'applyFilter'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:100:2:
+[37m      100 │   [32mapplyFilter[37m(): void {
+          ╵   [32m~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:100:15:
+[37m      100 │   applyFilter()[32m:[37m void {
+          ╵                [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:101:8:
+[37m      101 │     this[32m.[37mloading = true;
+          ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:101:23:
+[37m      101 │     this.loading = true[32m;[37m
+          ╵                        [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:102:8:
+[37m      102 │     this[32m.[37mtraceService.getTraces(this.filterForm.value).subscribe({
+          ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:102:32:
+[37m      102 │     this.traceService.getTraces([32mthis[37m.filterForm.value).subscribe({
+          ╵                                 [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'data' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:103:13:
+[37m      103 │       next: ([32mdata[37m) => {
+          ╵              [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:104:8:
+[37m      104 │         [32mthis[37m.dataSource.data = data;
+          ╵         [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:105:8:
+[37m      105 │         [32mthis[37m.loading = false;
+          ╵         [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'err' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:107:14:
+[37m      107 │       error: ([32merr[37m) => {
+          ╵               [32m~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:109:8:
+[37m      109 │         [32mthis[37m.loading = false;
+          ╵         [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:111:6:
+[37m      111 │     })[32m;[37m
+          ╵       [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'resetFilter'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:114:2:
+[37m      114 │   [32mresetFilter[37m(): void {
+          ╵   [32m~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:114:15:
+[37m      114 │   resetFilter()[32m:[37m void {
+          ╵                [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:115:8:
+[37m      115 │     this[32m.[37mfilterForm.reset();
+          ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:115:27:
+[37m      115 │     this.filterForm.reset()[32m;[37m
+          ╵                            [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:116:8:
+[37m      116 │     this[32m.[37mloadTraces();
+          ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:116:21:
+[37m      116 │     this.loadTraces()[32m;[37m
+          ╵                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'viewTrace'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:119:2:
+[37m      119 │   [32mviewTrace[37m(traceId: string): void {
+          ╵   [32m~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'traceId'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:119:12:
+[37m      119 │   viewTrace([32mtraceId[37m: string): void {
+          ╵             [32m~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:119:19:
+[37m      119 │   viewTrace(traceId[32m:[37m string): void {
+          ╵                    [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:119:21:
+[37m      119 │   viewTrace(traceId: [32mstring[37m): void {
+          ╵                      [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:119:28:
+[37m      119 │   viewTrace(traceId: string)[32m:[37m void {
+          ╵                             [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:120:8:
+[37m      120 │     this[32m.[37mrouter.navigate(['/traces', traceId]);
+          ╵         [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'traceId'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:120:37:
+[37m      120 │     this.router.navigate(['/traces', [32mtraceId[37m]);
+          ╵                                      [32m~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:120:46:
+[37m      120 │     this.router.navigate(['/traces', traceId])[32m;[37m
+          ╵                                               [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'getStatusClass'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:123:2:
+[37m      123 │   [32mgetStatusClass[37m(status: number): string {
+          ╵   [32m~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:123:23:
+[37m      123 │   getStatusClass(status[32m:[37m number): string {
+          ╵                        [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'number' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:123:25:
+[37m      123 │   getStatusClass(status: [32mnumber[37m): string {
+          ╵                          [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:123:32:
+[37m      123 │   getStatusClass(status: number)[32m:[37m string {
+          ╵                                 [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1434: Unexpected keyword or identifier.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:123:34:
+[37m      123 │   getStatusClass(status: number): [32mstring[37m {
+          ╵                                   [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:123:34:
+[37m      123 │   getStatusClass(status: number): [32mstring[37m {
+          ╵                                   [32m~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2365: Operator '>=' cannot be applied to types 'string' and 'number'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:124:8:
+[37m      124 │     if ([32mstatus >= 200[37m && status < 300) return 'status-success';
+          ╵         [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2365: Operator '<' cannot be applied to types 'string' and 'number'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:124:25:
+[37m      124 │     if (status >= 200 && [32mstatus < 300[37m) return 'status-success';
+          ╵                          [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2365: Operator '>=' cannot be applied to types 'string' and 'number'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:125:8:
+[37m      125 │     if ([32mstatus >= 400[37m && status < 500) return 'status-client-error';
+          ╵         [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2365: Operator '<' cannot be applied to types 'string' and 'number'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:125:25:
+[37m      125 │     if (status >= 400 && [32mstatus < 500[37m) return 'status-client-error';
+          ╵                          [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2365: Operator '>=' cannot be applied to types 'string' and 'number'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:126:8:
+[37m      126 │     if ([32mstatus >= 500[37m) return 'status-server-error';
+          ╵         [32m~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1128: Declaration or statement expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:129:0:
+[37m      129 │ [32m}[37m
+          ╵ [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mUnexpected "."[0m
+
+    src/app/features/trace-list/trace-list.component.ts:347:10:
+[37m      347 │     this: [32m.[37mloadTraces(),
+          ╵           [32m^[0m
+
+[39m[22m
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
 [1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m122.75 kB[39m[2m | [22m
 [32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
 [32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
 
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
+[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m308.55 kB[22m
 
-Application bundle generation complete. [3.084 seconds]
+Application bundle generation complete. [2.202 seconds]
 
-Watch mode enabled. Watching for file changes...
-NOTE: Raw file sizes do not reflect development server per-request transformations.
-  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [1.734 seconds]
 
---- Iniciando Frontend en 2026-04-25 01:50:11.910276 ---
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDuplicate member "displayedColumns" in class body[0m [duplicate-class-member]
 
-> traceflow-dashboard@0.0.0 start
-> ng serve
+    src/app/features/trace-list/trace-list.component.ts:174:4:
+[37m      174 │     [32mdisplayedColumns[37m = ['trace_id', 'service', 'path', 'duration_...
+          ╵     [32m~~~~~~~~~~~~~~~~[0m
 
-[1m[33mComponent HMR has been enabled, see https://angular.dev/hmr for more info.[39m[22m
-[33m>[39m Building...
-[32m√[39m Building...
+  The original member "displayedColumns" is here:
+
+    src/app/features/trace-list/trace-list.component.ts:173:4:
+[37m      173 │     [32mdisplayedColumns[37m = ['trace_id', 'service', 'path', 'duration_...
+          ╵     [32m~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2300: Duplicate identifier 'displayedColumns'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/trace-list/trace-list.component.ts:44:2:
+[37m      44 │   [32mdisplayedColumns[37m: string[] = ['trace_id', 'service', 'path', 'du...
+         ╵   [32m~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
 [1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m122.75 kB[39m[2m | [22m
 [32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
 [32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
 
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
+[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m308.55 kB[22m
 
-Application bundle generation complete. [2.804 seconds]
+Application bundle generation complete. [2.688 seconds]
 
-Watch mode enabled. Watching for file changes...
-NOTE: Raw file sizes do not reflect development server per-request transformations.
-  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
 
---- Iniciando Frontend en 2026-04-25 01:53:06.672706 ---
+No output file changes.
 
-> traceflow-dashboard@0.0.0 start
-> ng serve
+Application bundle generation complete. [3.568 seconds]
 
-[1m[33mComponent HMR has been enabled, see https://angular.dev/hmr for more info.[39m[22m
-[33m>[39m Building...
-[32m√[39m Building...
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+Application bundle generation failed. [2.942 seconds]
+
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1003: Identifier expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/features/dashboard/dashboard.component.ts:180:6:
+[37m      180 │       [32m}[37m,
+          ╵       [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mExpected identifier but found ";"[0m
+
+    src/app/features/dashboard/dashboard.component.ts:247:16:
+[37m      247 │                 [32m;[37m
+          ╵                 [32m^[0m
+
+[39m[22m
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
 [1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m122.75 kB[39m[2m | [22m
 [32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
 [32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
 
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
+[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m308.55 kB[22m
 
-Application bundle generation complete. [3.779 seconds]
+Application bundle generation complete. [2.931 seconds]
 
-Watch mode enabled. Watching for file changes...
-NOTE: Raw file sizes do not reflect development server per-request transformations.
-  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+Page reload sent to client(s).
+[33m>[39m Changes detected. Rebuilding...
+[32m√[39m Changes detected. Rebuilding...
+[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m [2m | [22m[36m122.75 kB[39m[2m | [22m
 
---- Iniciando Frontend en 2026-04-28 10:41:24.793101 ---
+Application bundle generation complete. [1.794 seconds]
 
-> traceflow-dashboard@0.0.0 start
-> ng serve
-
-[1m[33mComponent HMR has been enabled, see https://angular.dev/hmr for more info.[39m[22m
-[33m>[39m Building...
-[32m√[39m Building...
-[1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
-[32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
-[32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
-
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
-
-Application bundle generation complete. [10.825 seconds]
-
-Watch mode enabled. Watching for file changes...
-NOTE: Raw file sizes do not reflect development server per-request transformations.
-  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
-npm notice
-npm notice New major version of npm available! 10.9.3 -> 11.13.0
-npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.13.0
-npm notice To update run: npm install -g npm@11.13.0
-npm notice
-
---- Iniciando Frontend en 2026-04-28 13:50:26.474373 ---
-
-> traceflow-dashboard@0.0.0 start
-> ng serve
-
-[1m[33mComponent HMR has been enabled, see https://angular.dev/hmr for more info.[39m[22m
-[33m>[39m Building...
-[32m√[39m Building...
-[1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
-[32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
-[32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
-
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
-
-Application bundle generation complete. [2.145 seconds]
-
-Watch mode enabled. Watching for file changes...
-NOTE: Raw file sizes do not reflect development server per-request transformations.
-  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
-
---- Iniciando Frontend en 2026-04-28 14:01:50.290693 ---
-
-> traceflow-dashboard@0.0.0 start
-> ng serve
-
-[1m[33mComponent HMR has been enabled, see https://angular.dev/hmr for more info.[39m[22m
-[33m>[39m Building...
-[32m√[39m Building...
-[1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
-[32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
-[32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
-
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
-
-Application bundle generation complete. [2.021 seconds]
-
-Watch mode enabled. Watching for file changes...
-NOTE: Raw file sizes do not reflect development server per-request transformations.
-  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
-
---- Iniciando Frontend en 2026-04-28 14:03:09.488094 ---
-
-> traceflow-dashboard@0.0.0 start
-> ng serve
-
-[1m[33mComponent HMR has been enabled, see https://angular.dev/hmr for more info.[39m[22m
-[33m>[39m Building...
-[32m√[39m Building...
-[1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m         [2m | [22m[36m101.76 kB[39m[2m | [22m
-[32mstyles.css[39m         [2m | [22m[2mstyles[22m       [2m | [22m [36m96.02 kB[39m[2m | [22m
-[32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m    [2m | [22m [36m89.77 kB[39m[2m | [22m
-
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m287.55 kB[22m
-
-Application bundle generation complete. [1.980 seconds]
-
-Watch mode enabled. Watching for file changes...
-NOTE: Raw file sizes do not reflect development server per-request transformations.
-  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+Page reload sent to client(s).

@@ -4,6 +4,7 @@ Django settings for traceflow_backend project.
 from pathlib import Path
 from decouple import config  # <--- IMPORTACIÓN CORREGIDA (esta línea faltaba)
 from datetime import timedelta  # <--- También importamos timedelta para JWT
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -139,3 +140,43 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 # TraceFlow specific settings
 TRACE_SAMPLE_RATE = 1.0  # 1.0 = 100% sampling (cambiar según entorno)
+
+
+LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO').upper()
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {asctime} {module} - {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'traceflowApp': {  # Logger específico para tu componente
+            'handlers': ['console'],
+            'level': LOG_LEVEL,
+            'propagate': False,
+        },
+        'django': {  # Opcional: controlar logs de Django
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}

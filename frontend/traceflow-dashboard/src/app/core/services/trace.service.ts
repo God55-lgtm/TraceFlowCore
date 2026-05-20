@@ -51,6 +51,11 @@ export class TraceService {
   }
 
   getTracesPerService(): Observable<{name: string, count: number}[]> {
-  return this.http.get<{name: string, count: number}[]>(`${this.apiUrl}/traces-per-service/`);
-}
+    return this.http.get<{name: string, count: number}[]>(`${this.apiUrl}/traces-per-service/`);
+  }
+
+  // NUEVO MÉTODO PARA PURGAR TRAZAS
+  purgeTraces(beforeDate: string): Observable<{ deleted: number }> {
+    return this.http.delete<{ deleted: number }>(`${this.apiUrl}/purge/?before=${beforeDate}`);
+  }
 }

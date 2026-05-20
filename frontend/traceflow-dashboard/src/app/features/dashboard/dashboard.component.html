@@ -12,9 +12,34 @@
     </mat-card>
     <mat-card class="stat-card">
       <mat-card-header><mat-icon mat-card-avatar>dns</mat-icon> Servicios Activos</mat-card-header>
-      <mat-card-content><div class="stat-value">{{ services.length }}</div></mat-card-content>
+      <mat-card-content><div class="stat-value">{{ servicesData.length }}</div></mat-card-content>
     </mat-card>
   </div>
+
+  <!-- Panel de purga (solo visible para administradores) -->
+  <mat-card *ngIf="isAdmin" class="purge-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>delete_sweep</mat-icon>
+      <mat-card-title>Purgar trazas antiguas</mat-card-title>
+      <mat-card-subtitle>Elimina trazas anteriores a una fecha específica</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="purge-controls">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha límite (anterior a)</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="purgeDate" placeholder="YYYY-MM-DD">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="warn" (click)="purgeTraces()" [disabled]="!purgeDate || purging">
+          <mat-icon>delete_forever</mat-icon> {{ purging ? 'Purgando...' : 'Purgar trazas' }}
+        </button>
+      </div>
+      <div *ngIf="purgeResult" class="purge-result" [class.success]="purgeResult.success" [class.error]="!purgeResult.success">
+        {{ purgeResult.message }}
+      </div>
+    </mat-card-content>
+  </mat-card>
 
   <mat-card *ngIf="!loading" class="chart-card">
     <mat-card-header>

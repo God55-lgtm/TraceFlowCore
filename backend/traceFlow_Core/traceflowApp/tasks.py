@@ -1,17 +1,12 @@
 from celery import shared_task
 import logging
-import json
 from django.db import transaction
 from .models import Trace
 
 logger = logging.getLogger(__name__)
 
-@shared_task(bind=True, max_retries=5, default_retry_delay=10)
+@shared_task(bind=True, max_retries=5)
 def record_span_task(self, span_data):
-    """
-    Tarea Celery que guarda un span en PostgreSQL.
-    Con reintentos en caso de error.
-    """
     try:
         with transaction.atomic():
             Trace.objects.create(
@@ -21,5 +16,7 @@ def record_span_task(self, span_data):
                 data=span_data
             )
     except Exception as exc:
-        logger.warning(f"Error guardando span, reintentando: {exc}")
-        self.retry(exc=exc)
+        # Backoff exponencial: 2^retry_count segundos (2,4,8,16,32)
+        countdown = 2 ** self.request.retries
+        logger.warning(f"Error guardando span, reintento {self.request.retries+1}/5 en {countdown}s: {exc}")
+        self.retry(exc=exc, countdown=countdown)

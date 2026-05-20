@@ -58,7 +58,7 @@ export class TraceListComponent implements OnInit, OnDestroy {
     this.filterForm = this.fb.group({
       trace_id: [''],
       service: [''],
-      path: [''],  // Nuevo filtro por path
+      path: [''],  
       start_date: [''],
       end_date: [''],
       status_code: ['']

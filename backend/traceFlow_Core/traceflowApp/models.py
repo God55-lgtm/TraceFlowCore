@@ -22,3 +22,12 @@ class Example(models.Model):
     example = models.CharField(max_length=16, db_index=True)
 
 
+class TraceHash(models.Model):
+    trace_id = models.CharField(max_length=32, unique=True, db_index=True)
+    hash_sha256 = models.CharField(max_length=64)  # 64 caracteres hexadecimales
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'trace_hashes'
+
